@@ -7,10 +7,10 @@ const initialState = {
   status: 'idle',
 };
 
-export const incrementAsync = createAsyncThunk('counter/fetchCount', async (amount) => {
-  // const response = await fetchApi(amount);
+const incrementAsync = createAsyncThunk('counter/fetchCount', async (amount) => {
+  const response = await fetchApi(amount);
   // The value we return becomes the `fulfilled` action payload
-  return 'хуй';
+  return 'response';
 });
 
 export const customersSlice = createSlice({
@@ -47,7 +47,7 @@ export const customersSlice = createSlice({
   // },
 });
 
-export const { actions } = customersSlice;
+export const actions = { ...customersSlice.actions, incrementAsync };
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of

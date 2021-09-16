@@ -7,10 +7,19 @@ import { IconError } from '../icons';
 
 import styles from './index.module.scss';
 
-const DefoultTextField = (
-  props,
-  { error, id, label, type, fullWidth, defaultValue, helperText, value, required, bottomText },
-) => {
+const DefoultTextField = ({
+  error,
+  id,
+  label,
+  type,
+  fullWidth,
+  defaultValue,
+  helperText,
+  value,
+  required,
+  bottomText,
+  name,
+}) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => {
@@ -21,8 +30,6 @@ const DefoultTextField = (
     event.preventDefault();
   };
 
-  console.log('props', props);
-
   if (type === 'password') {
     return (
       <FormControl fullWidth={fullWidth} className={styles.password}>
@@ -31,6 +38,7 @@ const DefoultTextField = (
           id="standard-adornment-password"
           type={showPassword ? 'text' : 'password'}
           value={value}
+          name={name}
           endAdornment={
             <InputAdornment position="end">
               <IconButton
@@ -49,7 +57,7 @@ const DefoultTextField = (
   if (type === 'phone') {
     return (
       <InputMask mask="+9(999) 999 99 99" maskChar=" ">
-        {() => <TextField label={label} fullWidth={fullWidth} />}
+        {() => <TextField label={label} fullWidth={fullWidth} name={name} />}
       </InputMask>
     );
   }
@@ -57,10 +65,10 @@ const DefoultTextField = (
   return (
     <>
       <TextField
-        {...props}
         className={styles.textField}
         error={error}
         id={id}
+        name={name}
         type={type || 'text'}
         label={label}
         fullWidth={fullWidth}

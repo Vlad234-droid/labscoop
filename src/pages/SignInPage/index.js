@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, TextField, Checkbox, FormControlLabel, Grid, Box } from '@material-ui/core/';
+import { Button, Checkbox, FormControlLabel, Grid, Box } from '@material-ui/core/';
+import TextField from '../../components/TextField';
 
 import { actions } from '../../core/services/customers/';
 
@@ -12,19 +13,22 @@ import style from './index.module.scss';
 const SignInPage = () => {
   const state = useSelector((state) => state.customers.value);
   const dispatch = useDispatch();
-
-  console.log('actions', actions);
-  useEffect(() => {
-    // dispatch(actions.increment());
-    // dispatch(incrementAsync()).then((data) => {
-    //   console.log('data', data);
-    // });
-  }, []);
+  const [form, setForm] = useState({
+    email: {
+      value: '',
+      error: false,
+    },
+    password: {
+      value: '',
+      error: false,
+    },
+  });
 
   const onSubmit = (e) => {
     const form = new FormData(e.target);
-    console.log('submit', form);
     e.preventDefault();
+    console.log('email', form.get('email'));
+    console.log('password', form.get('password'));
   };
 
   return (
@@ -48,15 +52,15 @@ const SignInPage = () => {
                 <Grid item>
                   <Box mb={2} ml={'auto'} mr={'auto'} maxWidth={256}>
                     <TextField
-                      error={false}
+                      error={form.email.error}
                       label="Email"
                       name="email"
+                      value={form.email.value}
                       fullWidth
                       // defaultValue='Hello World'
                       // helperText={
                       //   <>
-                      //     <b>Full Name</b> is required to add <br /> shipping
-                      //     address
+                      //     <b>Full Name</b> is required to add <br /> shipping address
                       //   </>
                       // }
                     />
@@ -66,7 +70,8 @@ const SignInPage = () => {
                   <Box mb={2} ml={'auto'} mr={'auto'} maxWidth={256}>
                     <TextField
                       error={false}
-                      label="Error"
+                      label="Password"
+                      name="password"
                       fullWidth
                       type="password"
                       // defaultValue='Hello World'
@@ -89,7 +94,7 @@ const SignInPage = () => {
                     label="Keep me signed in on this computer"
                   />
                   <Box mt={2}>
-                    <Button variant="contained" color="primary" fullWidth type="submit">
+                    <Button variant="contained" color="primary" type="submit" fullWidth>
                       Sign In
                     </Button>
                   </Box>
