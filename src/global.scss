@@ -1,0 +1,46 @@
+@import "~slick-carousel/slick/slick.scss";
+@import "~slick-carousel/slick/slick-theme.scss";
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap");
+@import "./core/attributes.scss";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: $Nunito;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #fdfeff;
+}
+
+a {
+  text-decoration: none;
+  color: #3360ad;
+  display: inline-block;
+  position: relative;
+  &.no-decoration {
+    &::before {
+      display: none;
+    }
+  }
+  &::before {
+    content: "";
+    display: block;
+    height: 1px;
+    background-color: currentColor;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    transform: scaleX(0);
+    transition: transform 300ms ease;
+  }
+  &:hover {
+    &::before {
+      transform: scaleX(1);
+    }
+  }
+}

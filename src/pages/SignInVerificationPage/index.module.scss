@@ -1,0 +1,102 @@
+.form-wrapper {
+  padding: 64px;
+}
+.form {
+  max-width: 864px;
+  height: 545px;
+  margin: auto;
+  background: #f8f8fa;
+  box-shadow: 0px 0px 16px rgba(16, 16, 16, 0.16);
+  border-radius: 24px;
+  .formControl {
+    max-width: 256px;
+    margin: 0 auto 24px auto;
+  }
+  .forgot {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: 0.01em;
+    margin-top: 12px;
+    display: inline-block;
+  }
+  .submit {
+    :global {
+      .MuiButton-root {
+        margin-top: 18px;
+      }
+    }
+  }
+  .keep {
+    :global {
+      .MuiFormControlLabel-label {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 16px;
+        color: #5a6372;
+      }
+    }
+  }
+  .create {
+    text-align: center;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    color: #5a6372;
+    margin-top: 8px;
+  }
+  :global {
+    .MuiGrid-container {
+      height: 100%;
+    }
+    form {
+      width: 50%;
+      height: 100%;
+      background-color: #fff;
+      overflow: hidden;
+      padding: 56px 24px 70px 24px;
+      h3 {
+        max-width: 363px;
+        font-weight: 800;
+        font-size: 24px;
+        line-height: 28px;
+        text-align: center;
+        letter-spacing: 0.02em;
+
+        color: #2d3543;
+        margin: 0 auto 56px auto;
+        b {
+          font-weight: 800;
+        }
+      }
+    }
+  }
+}
+:global {
+  .page__sign-in {
+    header {
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 64px;
+      border-bottom: 2px solid #3360ad;
+      font-style: normal;
+      font-weight: 800;
+      font-size: 16px;
+      line-height: 16px;
+      letter-spacing: 0.03em;
+      color: #3360ad;
+      a {
+        color: currentColor;
+        text-decoration: none;
+      }
+      img {
+        height: 24px;
+      }
+    }
+  }
+}
