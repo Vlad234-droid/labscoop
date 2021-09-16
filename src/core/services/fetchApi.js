@@ -17,7 +17,6 @@ export async function fetchApi(endpoint, method, headers, body, logout) {
       //   duration: 3.5,
       // });
     }
-
     throw new Error(data.detail);
   }
   return data;

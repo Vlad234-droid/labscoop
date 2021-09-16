@@ -3,13 +3,36 @@ import Slider from 'react-slick';
 import StepPersonal from './StepPersonal';
 import StepOrganization from './StepOrganization';
 import StepPassword from './StepPassword';
-
 import Header from './Header';
-
 import style from './index.module.scss';
+import { actions } from '../../core/services/customers';
+import { bindActionCreators } from 'redux';
+import { useDispatch } from 'react-redux';
 
 function SignUpPage() {
   const slider = useRef();
+  const dispatch = useDispatch();
+  const [POSTInfo, setPOSTInfo] = useState(false);
+
+  const { registerCustomer } = bindActionCreators(actions, dispatch);
+
+  const [valuesToSignUp, setValuesToSignUp] = useState({
+    email: '',
+    name: '',
+    last_name: '',
+    password: '',
+    phone: '',
+    country: '',
+    organization: {
+      name: '',
+      type: '',
+      position: '',
+      profit: '',
+    },
+  });
+
+  console.log('valuesToSignUp', valuesToSignUp);
+
   const [currentStep, setCurrentStep] = useState(0);
 
   const nextStep = () => {
@@ -17,6 +40,10 @@ function SignUpPage() {
     slider.current.slickNext();
     setCurrentStep((prev) => prev + 1);
   };
+
+  if (POSTInfo) {
+    registerCustomer(valuesToSignUp).then((data) => console.log('data from POST', data));
+  }
 
   return (
     <div className="page__sign-up">
@@ -36,9 +63,13 @@ function SignUpPage() {
               initialSlide={0}
               // accessibility={false}
             >
-              <StepPersonal nextStep={nextStep} />
-              <StepOrganization nextStep={nextStep} />
-              <StepPassword />
+              <StepPersonal nextStep={nextStep} setValuesToSignUp={setValuesToSignUp} valuesToSignUp={valuesToSignUp} />
+              <StepOrganization
+                nextStep={nextStep}
+                setValuesToSignUp={setValuesToSignUp}
+                valuesToSignUp={valuesToSignUp}
+              />
+              <StepPassword setValuesToSignUp={setValuesToSignUp} setPOSTInfo={setPOSTInfo} setPOSTInfo={setPOSTInfo} />
             </Slider>
           </div>
         </div>

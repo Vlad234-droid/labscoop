@@ -1,91 +1,179 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
-import TextField from '../../../components/TextField';
-import { Grid, Box } from '@material-ui/core/';
+import { HelperText } from '../../../components/TextField';
+import { Grid, Box, TextField } from '@material-ui/core/';
 import style from '../index.module.scss';
+import { useForm, Controller } from 'react-hook-form';
+import InputMask from 'react-input-mask';
 
-const StepPersonal = ({ nextStep }) => {
-  const [phone, setPhone] = useState();
+const StepPersonal = ({ nextStep, setValuesToSignUp, valuesToSignUp }) => {
+  // const [phone, setPhone] = useState();
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const onSubmit = (e) => {
-    const form = new FormData(e.target);
-    e.preventDefault();
-    console.log('phone', form.get('phone'));
+  const onSubmit = (data) => {
+    const prev = valuesToSignUp;
+    for (let item in data) {
+      prev[item] = data[item];
+    }
+    setValuesToSignUp(() => prev);
+    nextStep();
   };
 
   return (
     <div className="step_slide">
       <Grid container>
         <Grid item xs={6}>
-          <form onSubmit={onSubmit}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <Grid container direction="column" wrap="nowrap">
               <Grid item>
                 <Box mb={2} ml={'auto'} mr={'auto'} maxWidth={320}>
-                  <TextField
-                    error={false}
-                    label="First Name"
-                    fullWidth
-                    // defaultValue='Hello World'
-                    // helperText={
-                    //   <>
-                    //     <b>Full Name</b> is required to add <br /> shipping
-                    //     address
-                    //   </>
-                    // }
+                  <Controller
+                    name="name"
+                    defaultValue=""
+                    control={control}
+                    rules={{
+                      required: true,
+                      maxLength: 20,
+                      validate: (value) => {
+                        const re = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
+                        return re.test(value);
+                      },
+                    }}
+                    render={({ field }) => (
+                      <TextField
+                        {...field}
+                        error={errors.name !== undefined}
+                        label="First Name"
+                        fullWidth
+                        name="name"
+                        helperText={
+                          errors.name !== undefined ? (
+                            <HelperText
+                              text={
+                                <>
+                                  <b>Full Name</b> is required to add <br /> shipping address
+                                </>
+                              }
+                            />
+                          ) : null
+                        }
+                      />
+                    )}
                   />
                 </Box>
               </Grid>
               <Grid item>
                 <Box mb={2} ml={'auto'} mr={'auto'} maxWidth={320}>
-                  <TextField
-                    error={false}
-                    label="Last Name"
-                    fullWidth
-                    // defaultValue='Hello World'
-                    // helperText={
-                    //   <>
-                    //     <b>Full Name</b> is required to add <br /> shipping
-                    //     address
-                    //   </>
-                    // }
+                  <Controller
+                    name="last_name"
+                    defaultValue=""
+                    control={control}
+                    rules={{
+                      required: true,
+                      maxLength: 20,
+                      validate: (value) => {
+                        const re = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
+                        return re.test(value);
+                      },
+                    }}
+                    render={({ field }) => (
+                      <TextField
+                        {...field}
+                        error={errors.last_name !== undefined}
+                        label="Last Name"
+                        fullWidth
+                        name="last_name"
+                        helperText={
+                          errors.last_name !== undefined ? (
+                            <HelperText
+                              text={
+                                <>
+                                  <b>Full Name</b> is required to add <br /> shipping address
+                                </>
+                              }
+                            />
+                          ) : null
+                        }
+                      />
+                    )}
                   />
                 </Box>
               </Grid>
               <Grid item>
                 <Box mb={2} ml={'auto'} mr={'auto'} maxWidth={320}>
-                  <TextField
-                    error={false}
-                    type="phone"
-                    label="Phone number"
+                  <Controller
                     name="phone"
-                    fullWidth
-                    // defaultValue='Hello World'
-                    // helperText={
-                    //   <>
-                    //     <b>Full Name</b> is required to add <br /> shipping
-                    //     address
-                    //   </>
-                    // }
+                    defaultValue=""
+                    control={control}
+                    rules={{
+                      required: true,
+                    }}
+                    render={({ field }) => (
+                      <InputMask {...field} mask="+9(999) 999 99 99" maskChar=" ">
+                        {() => (
+                          <TextField
+                            error={errors.phone !== undefined}
+                            type="phone"
+                            label="Phone number"
+                            name="phone"
+                            fullWidth
+                            helperText={
+                              errors.phone !== undefined ? (
+                                <HelperText
+                                  text={
+                                    <>
+                                      <b>Full Name</b> is required to add <br /> shipping address
+                                    </>
+                                  }
+                                />
+                              ) : null
+                            }
+                          />
+                        )}
+                      </InputMask>
+                    )}
                   />
                 </Box>
               </Grid>
               <Grid item>
                 <Box mb={2} ml={'auto'} mr={'auto'} maxWidth={320}>
-                  <TextField
-                    error={false}
-                    label="Enter your email"
-                    type="email"
-                    required
-                    fullWidth
-                    bottomText="We suggest using the email address you use at work"
-                    // defaultValue='Hello World'
-                    // helperText={
-                    //   <>
-                    //     <b>Full Name</b> is required to add <br /> shipping
-                    //     address
-                    //   </>
-                    // }
+                  <Controller
+                    name="email"
+                    defaultValue=""
+                    rules={{
+                      required: true,
+                      validate: (value) => {
+                        const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                        return re.test(value);
+                      },
+                    }}
+                    control={control}
+                    render={({ field }) => (
+                      <TextField
+                        {...field}
+                        error={errors.email !== undefined}
+                        label="Enter your email"
+                        fullWidth
+                        bottomText="We suggest using the email address you use at work"
+                        name="email"
+                        helperText={
+                          errors.email !== undefined ? (
+                            <HelperText
+                              text={
+                                <>
+                                  <b>Full Name</b> is required to add <br /> shipping address
+                                </>
+                              }
+                            />
+                          ) : null
+                        }
+                      />
+                    )}
                   />
                 </Box>
               </Grid>

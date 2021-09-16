@@ -81,7 +81,7 @@ const DefoultTextField = ({
   );
 };
 
-const HelperText = ({ helperText }) => {
+export const HelperText = ({ helperText }) => {
   return (
     <>
       <Tooltip title={helperText} placement="top" arrow interactive>
