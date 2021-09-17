@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
+import { HelperText } from '../../../components/TextField';
 import {
   FormControl,
   InputLabel,
@@ -12,6 +13,7 @@ import {
   Checkbox,
   Grid,
   Box,
+  FormHelperText,
 } from '@material-ui/core/';
 
 import { Visibility, VisibilityOff } from '@material-ui/icons';
@@ -19,7 +21,11 @@ import style from '../index.module.scss';
 
 const StepPassword = ({ setValuesToSignUp, setPOSTInfo }) => {
   const [showPassword, setShowPassword] = useState(false);
-  const { control, handleSubmit } = useForm();
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -46,35 +52,96 @@ const StepPassword = ({ setValuesToSignUp, setPOSTInfo }) => {
             <Grid container direction="column" wrap="nowrap">
               <Grid item>
                 <Box mb={2} ml={'auto'} mr={'auto'} maxWidth={320}>
-                  <FormControl fullWidth className={style.password}>
-                    <InputLabel htmlFor="standard-adornment-password">Create Password</InputLabel>
-                    <Controller
-                      name="password"
-                      control={control}
-                      defaultValue=""
-                      rules={{
-                        required: true,
-                      }}
-                      render={({ field }) => (
-                        <Input
-                          {...field}
-                          id="standard-adornment-password"
-                          type={showPassword ? 'text' : 'password'}
-                          // value={value}
-                          endAdornment={
-                            <InputAdornment position="end">
-                              <IconButton
-                                aria-label="toggle password visibility"
-                                onClick={handleClickShowPassword}
-                                onMouseDown={handleMouseDownPassword}>
-                                {showPassword ? <Visibility /> : <VisibilityOff />}
-                              </IconButton>
-                            </InputAdornment>
-                          }
-                        />
-                      )}
-                    />
-                  </FormControl>
+                  <Controller
+                    name="password"
+                    control={control}
+                    defaultValue=""
+                    rules={{
+                      required: (
+                        <>
+                          <b>Password</b> is required
+                        </>
+                      ),
+                      validate: (value) => {
+                        const min = value.length >= 8;
+                        const upper = /[A-Z]{3}([0-9]{1,4})?|[A-Z]{1,3}/.test(value);
+                        const number = /.*[0-9].*/.test(value);
+                        const special = /.*[!@#$%^&*()_].*/.test(value);
+
+                        if (min && upper && number && special) {
+                          return true;
+                        } else {
+                          return (
+                            <>
+                              {!min && (
+                                <p>
+                                  <b>Password</b> must be at least 8 characters!
+                                </p>
+                              )}
+                              {!upper && (
+                                <p>
+                                  <b>Password</b> should consist of: upper and lower case letters
+                                </p>
+                              )}
+                              {!number && (
+                                <p>
+                                  <b>Password</b> should consist of: at least 1 number
+                                </p>
+                              )}
+                              {!special && (
+                                <p>
+                                  <b>Password</b> should consist of: at least 1 special character
+                                </p>
+                              )}
+                            </>
+                          );
+                        }
+
+                        // { min: 8, message: 'Password must be at least 8 characters!' },
+                        // { required: true, message: 'Please input your password!' },
+                        // {
+                        //   pattern: /[A-Z]{3}([0-9]{1,4})?|[A-Z]{1,3}/,
+                        //   message: 'Password should consist of: upper and lower case letters',
+                        // },
+                        // {
+                        //   pattern: /.*[0-9].*/,
+                        //   message: 'Password should consist of: at least 1 number',
+                        // },
+                        // {
+                        //   pattern: /.*[!@#$%^&*()_].*/,
+                        //   message: 'Password should consist of: at least 1 special character',
+                        // },
+                      },
+                    }}
+                    render={({ field }) => (
+                      <>
+                        <FormControl fullWidth className={style.password} error={errors.password ? true : false}>
+                          <InputLabel htmlFor="standard-adornment-password">Create Password</InputLabel>
+                          <Input
+                            {...field}
+                            id="standard-adornment-password"
+                            type={showPassword ? 'text' : 'password'}
+                            // value={value}
+                            endAdornment={
+                              <InputAdornment position="end">
+                                <IconButton
+                                  aria-label="toggle password visibility"
+                                  onClick={handleClickShowPassword}
+                                  onMouseDown={handleMouseDownPassword}>
+                                  {showPassword ? <Visibility /> : <VisibilityOff />}
+                                </IconButton>
+                              </InputAdornment>
+                            }
+                          />
+                          {errors.password && (
+                            <FormHelperText>
+                              <HelperText text={errors.password.message} />
+                            </FormHelperText>
+                          )}
+                        </FormControl>
+                      </>
+                    )}
+                  />
                 </Box>
                 <Box maxWidth={320} ml="auto" mr="auto" mb={3} mt={3}>
                   <FormControlLabel

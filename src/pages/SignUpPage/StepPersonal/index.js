@@ -37,12 +37,12 @@ const StepPersonal = ({ nextStep, setValuesToSignUp, valuesToSignUp }) => {
                     defaultValue=""
                     control={control}
                     rules={{
-                      required: true,
+                      required: (
+                        <>
+                          <b>First Name</b> is required
+                        </>
+                      ),
                       maxLength: 20,
-                      validate: (value) => {
-                        const re = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
-                        return re.test(value);
-                      },
                     }}
                     render={({ field }) => (
                       <TextField
@@ -51,17 +51,7 @@ const StepPersonal = ({ nextStep, setValuesToSignUp, valuesToSignUp }) => {
                         label="First Name"
                         fullWidth
                         name="name"
-                        helperText={
-                          errors.name !== undefined ? (
-                            <HelperText
-                              text={
-                                <>
-                                  <b>Full Name</b> is required to add <br /> shipping address
-                                </>
-                              }
-                            />
-                          ) : null
-                        }
+                        helperText={errors.name !== undefined ? <HelperText text={errors.name.message} /> : false}
                       />
                     )}
                   />
@@ -74,12 +64,12 @@ const StepPersonal = ({ nextStep, setValuesToSignUp, valuesToSignUp }) => {
                     defaultValue=""
                     control={control}
                     rules={{
-                      required: true,
+                      required: (
+                        <>
+                          <b>Last Name</b> is required
+                        </>
+                      ),
                       maxLength: 20,
-                      validate: (value) => {
-                        const re = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
-                        return re.test(value);
-                      },
                     }}
                     render={({ field }) => (
                       <TextField
@@ -89,15 +79,7 @@ const StepPersonal = ({ nextStep, setValuesToSignUp, valuesToSignUp }) => {
                         fullWidth
                         name="last_name"
                         helperText={
-                          errors.last_name !== undefined ? (
-                            <HelperText
-                              text={
-                                <>
-                                  <b>Full Name</b> is required to add <br /> shipping address
-                                </>
-                              }
-                            />
-                          ) : null
+                          errors.last_name !== undefined ? <HelperText text={errors.last_name.message} /> : false
                         }
                       />
                     )}
@@ -111,7 +93,11 @@ const StepPersonal = ({ nextStep, setValuesToSignUp, valuesToSignUp }) => {
                     defaultValue=""
                     control={control}
                     rules={{
-                      required: true,
+                      required: (
+                        <>
+                          <b>Phone Number</b> is required
+                        </>
+                      ),
                     }}
                     render={({ field }) => (
                       <InputMask {...field} mask="+9(999) 999 99 99" maskChar=" ">
@@ -122,17 +108,7 @@ const StepPersonal = ({ nextStep, setValuesToSignUp, valuesToSignUp }) => {
                             label="Phone number"
                             name="phone"
                             fullWidth
-                            helperText={
-                              errors.phone !== undefined ? (
-                                <HelperText
-                                  text={
-                                    <>
-                                      <b>Full Name</b> is required to add <br /> shipping address
-                                    </>
-                                  }
-                                />
-                              ) : null
-                            }
+                            helperText={errors.phone !== undefined ? <HelperText text={errors.phone.message} /> : false}
                           />
                         )}
                       </InputMask>
@@ -146,33 +122,30 @@ const StepPersonal = ({ nextStep, setValuesToSignUp, valuesToSignUp }) => {
                     name="email"
                     defaultValue=""
                     rules={{
-                      required: true,
+                      required: (
+                        <>
+                          <b>Email</b> is required
+                        </>
+                      ),
                       validate: (value) => {
-                        const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                        return re.test(value);
+                        const re =
+                          /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                        return re.test(value) ? null : 'Enter valid email';
                       },
                     }}
                     control={control}
                     render={({ field }) => (
-                      <TextField
-                        {...field}
-                        error={errors.email !== undefined}
-                        label="Enter your email"
-                        fullWidth
-                        bottomText="We suggest using the email address you use at work"
-                        name="email"
-                        helperText={
-                          errors.email !== undefined ? (
-                            <HelperText
-                              text={
-                                <>
-                                  <b>Full Name</b> is required to add <br /> shipping address
-                                </>
-                              }
-                            />
-                          ) : null
-                        }
-                      />
+                      <>
+                        <TextField
+                          {...field}
+                          error={errors.email !== undefined}
+                          label="Enter your email"
+                          fullWidth
+                          name="email"
+                          helperText={errors.email !== undefined ? <HelperText text={errors.email.message} /> : false}
+                        />
+                        <span className="bottom-text">We suggest using the email address you use at work</span>
+                      </>
                     )}
                   />
                 </Box>

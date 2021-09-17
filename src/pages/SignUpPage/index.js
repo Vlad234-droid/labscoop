@@ -22,16 +22,14 @@ function SignUpPage() {
     last_name: '',
     password: '',
     phone: '',
-    country: '',
+    country: 'USA',
     organization: {
       name: '',
       type: '',
       position: '',
-      profit: '',
+      profit: true,
     },
   });
-
-  console.log('valuesToSignUp', valuesToSignUp);
 
   const [currentStep, setCurrentStep] = useState(0);
 

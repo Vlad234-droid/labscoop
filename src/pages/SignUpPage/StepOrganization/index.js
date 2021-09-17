@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
-import { FormControl, InputLabel, Select, MenuItem, TextField } from '@material-ui/core/';
+import { FormControl, InputLabel, Select, MenuItem, TextField, FormHelperText } from '@material-ui/core/';
 import { useForm, Controller } from 'react-hook-form';
 import { HelperText } from '../../../components/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -34,30 +34,41 @@ const StepOrganization = ({ nextStep, setValuesToSignUp, valuesToSignUp }) => {
             <Grid container direction="column" wrap="nowrap">
               <Grid item>
                 <Box mb={2} ml={'auto'} mr={'auto'} maxWidth={320}>
-                  <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">Organization Type</InputLabel>
-                    <Controller
-                      name="type"
-                      control={control}
-                      defaultValue=""
-                      rules={{
-                        required: true,
-                      }}
-                      render={({ field }) => (
-                        <Select
-                          {...field}
-                          // labelId='demo-simple-select-label'
-                          // id='demo-simple-select'
-                          // value={age}
-                          // onChange={handleChange}
-                        >
-                          <MenuItem value={10}>Type 1</MenuItem>
-                          <MenuItem value={20}>Type 2</MenuItem>
-                          <MenuItem value={30}>Type 3</MenuItem>
-                        </Select>
-                      )}
-                    />
-                  </FormControl>
+                  <Controller
+                    name="type"
+                    control={control}
+                    defaultValue=""
+                    rules={{
+                      required: (
+                        <>
+                          <b>Organization Type</b> is required
+                        </>
+                      ),
+                    }}
+                    render={({ field }) => (
+                      <>
+                        <FormControl fullWidth error={errors.type}>
+                          <InputLabel id="demo-simple-select-label">Organization Type</InputLabel>
+                          <Select
+                            {...field}
+                            // labelId='demo-simple-select-label'
+                            // id='demo-simple-select'
+                            // value={age}
+                            // onChange={handleChange}
+                          >
+                            <MenuItem value={10}>Type 1</MenuItem>
+                            <MenuItem value={20}>Type 2</MenuItem>
+                            <MenuItem value={30}>Type 3</MenuItem>
+                          </Select>
+                          {errors.type && (
+                            <FormHelperText>
+                              <HelperText text={errors.type.message} />
+                            </FormHelperText>
+                          )}
+                        </FormControl>
+                      </>
+                    )}
+                  />
                 </Box>
               </Grid>
               <Grid item>
@@ -67,11 +78,11 @@ const StepOrganization = ({ nextStep, setValuesToSignUp, valuesToSignUp }) => {
                     control={control}
                     defaultValue=""
                     rules={{
-                      required: true,
-                      validate: (value) => {
-                        const re = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
-                        return re.test(value);
-                      },
+                      required: (
+                        <>
+                          <b>Organization Name</b> is required
+                        </>
+                      ),
                     }}
                     render={({ field }) => (
                       <TextField
@@ -80,17 +91,7 @@ const StepOrganization = ({ nextStep, setValuesToSignUp, valuesToSignUp }) => {
                         label="Organization Name"
                         fullWidth
                         name="name"
-                        helperText={
-                          errors.name !== undefined ? (
-                            <HelperText
-                              text={
-                                <>
-                                  <b>Full Name</b> is required to add <br /> shipping address
-                                </>
-                              }
-                            />
-                          ) : null
-                        }
+                        helperText={errors.name !== undefined ? <HelperText text={errors.name.message} /> : null}
                       />
                     )}
                   />
@@ -99,30 +100,35 @@ const StepOrganization = ({ nextStep, setValuesToSignUp, valuesToSignUp }) => {
 
               <Grid item>
                 <Box mb={2} ml={'auto'} mr={'auto'} maxWidth={320}>
-                  <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">Position</InputLabel>
-                    <Controller
-                      name="position"
-                      control={control}
-                      defaultValue=""
-                      rules={{
-                        required: true,
-                      }}
-                      render={({ field }) => (
-                        <Select
-                          {...field}
-                          // labelId='demo-simple-select-label'
-                          // id='demo-simple-select'
-                          // value={age}
-                          // onChange={handleChange}
-                        >
-                          <MenuItem value={10}>Position 1</MenuItem>
-                          <MenuItem value={20}>Position 2</MenuItem>
-                          <MenuItem value={30}>Position 3</MenuItem>
-                        </Select>
-                      )}
-                    />
-                  </FormControl>
+                  <Controller
+                    name="position"
+                    control={control}
+                    defaultValue=""
+                    rules={{
+                      required: (
+                        <>
+                          <b>Organization Position</b> is required
+                        </>
+                      ),
+                    }}
+                    render={({ field }) => (
+                      <>
+                        <FormControl fullWidth error={errors.position}>
+                          <InputLabel id="demo-simple-select-label">Organization Position</InputLabel>
+                          <Select {...field}>
+                            <MenuItem value={10}>Position 1</MenuItem>
+                            <MenuItem value={20}>Position 2</MenuItem>
+                            <MenuItem value={30}>Position 3</MenuItem>
+                          </Select>
+                          {errors.position && (
+                            <FormHelperText>
+                              <HelperText text={errors.position.message} />
+                            </FormHelperText>
+                          )}
+                        </FormControl>
+                      </>
+                    )}
+                  />
                 </Box>
               </Grid>
 

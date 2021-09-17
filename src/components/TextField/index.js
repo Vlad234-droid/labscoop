@@ -81,10 +81,10 @@ const DefoultTextField = ({
   );
 };
 
-export const HelperText = ({ helperText }) => {
+export const HelperText = ({ text }) => {
   return (
     <>
-      <Tooltip title={helperText} placement="top" arrow interactive>
+      <Tooltip title={text} placement="top" arrow interactive>
         <span>
           <IconError />
         </span>

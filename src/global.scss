@@ -1,7 +1,7 @@
-@import "~slick-carousel/slick/slick.scss";
-@import "~slick-carousel/slick/slick-theme.scss";
-@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap");
-@import "./core/attributes.scss";
+@import '~slick-carousel/slick/slick.scss';
+@import '~slick-carousel/slick/slick-theme.scss';
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap');
+@import './core/attributes.scss';
 
 * {
   box-sizing: border-box;
@@ -27,7 +27,7 @@ a {
     }
   }
   &::before {
-    content: "";
+    content: '';
     display: block;
     height: 1px;
     background-color: currentColor;
@@ -43,4 +43,13 @@ a {
       transform: scaleX(1);
     }
   }
+}
+
+.bottom-text {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  color: #5a6372;
+  margin-top: 4px;
 }
