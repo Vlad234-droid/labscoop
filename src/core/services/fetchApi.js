@@ -1,5 +1,5 @@
-export async function fetchApi(endpoint, method, headers, body, logout) {
-  headers = headers || { 'Content-Type': 'application/json', Accept: 'application/json' };
+export async function fetchApi(endpoint, method, head, body) {
+  const headers = { ...head, Accept: 'application/json' };
   method = method || 'GET';
   const config = {
     method,
@@ -10,14 +10,7 @@ export async function fetchApi(endpoint, method, headers, body, logout) {
   const data = await response.json();
 
   if (!response.ok) {
-    if (response.status === 401) {
-      logout();
-      // notification.error({
-      //   message: 'Session expired. Please login again.',
-      //   duration: 3.5,
-      // });
-    }
-    throw new Error(data.detail);
+    throw new Error(data.detail.error);
   }
   return data;
 }

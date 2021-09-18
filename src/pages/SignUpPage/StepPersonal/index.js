@@ -42,7 +42,14 @@ const StepPersonal = ({ nextStep, setValuesToSignUp, valuesToSignUp }) => {
                           <b>First Name</b> is required
                         </>
                       ),
-                      maxLength: 20,
+                      validate: (value) => {
+                        const re = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
+                        return re.test(value) ? true : 'The name must contain only letters, space and dash';
+                      },
+                      maxLength: {
+                        value: 30,
+                        message: 'First Name must have a maximum of 30 characters',
+                      },
                     }}
                     render={({ field }) => (
                       <TextField
@@ -69,7 +76,14 @@ const StepPersonal = ({ nextStep, setValuesToSignUp, valuesToSignUp }) => {
                           <b>Last Name</b> is required
                         </>
                       ),
-                      maxLength: 20,
+                      validate: (value) => {
+                        const re = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
+                        return re.test(value) ? true : 'The name must contain only letters, space and dash';
+                      },
+                      maxLength: {
+                        value: 30,
+                        message: 'First Name must have a maximum of 30 characters',
+                      },
                     }}
                     render={({ field }) => (
                       <TextField
@@ -98,6 +112,11 @@ const StepPersonal = ({ nextStep, setValuesToSignUp, valuesToSignUp }) => {
                           <b>Phone Number</b> is required
                         </>
                       ),
+                      validate: (value) => {
+                        const re = /^\+?[0-9][-\(]?\d{3}\)? ?\d{3} ?\d{2} ?\d{2}$/;
+                        console.log(re.test(value));
+                        return re.test(value) ? true : 'The phone number not valid';
+                      },
                     }}
                     render={({ field }) => (
                       <InputMask {...field} mask="+9(999) 999 99 99" maskChar=" ">

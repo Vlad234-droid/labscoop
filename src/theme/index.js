@@ -9,8 +9,16 @@ const theme = createTheme({
     primary: {
       main: '#3360AD',
     },
+    error: {
+      main: '#EA1763',
+    },
   },
   overrides: {
+    MuiCircularProgress: {
+      root: {
+        transition: 'width .3s ease, hight .3s ease',
+      },
+    },
     MuiButton: {
       root: {
         minWidth: 232,
@@ -18,6 +26,13 @@ const theme = createTheme({
         boxShadow: '0px 0px 8px rgba(45, 53, 67, 0.12)',
         borderRadius: 8,
         textTransform: 'none',
+        transition:
+          'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+        '&.loading': {
+          opacity: 0.5,
+          pointerEvents: 'none',
+          transform: 'scale(.9)',
+        },
       },
       containedPrimary: {
         backgroundColor: '#3360AD',

@@ -14,12 +14,13 @@ import {
   Grid,
   Box,
   FormHelperText,
+  CircularProgress,
 } from '@material-ui/core/';
 
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import style from '../index.module.scss';
 
-const StepPassword = ({ setValuesToSignUp, setPOSTInfo }) => {
+const StepPassword = ({ onSubmit, loading }) => {
   const [showPassword, setShowPassword] = useState(false);
   const {
     control,
@@ -33,15 +34,6 @@ const StepPassword = ({ setValuesToSignUp, setPOSTInfo }) => {
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
-  };
-
-  const onSubmit = (data) => {
-    setValuesToSignUp((prev) => ({
-      ...prev,
-      password: data.password,
-    }));
-
-    setPOSTInfo(() => true);
   };
 
   return (
@@ -161,8 +153,13 @@ const StepPassword = ({ setValuesToSignUp, setPOSTInfo }) => {
 
               <Box mt={'auto'} ml={'auto'} mr={'auto'} maxWidth={320}>
                 <Box mt={2}>
-                  <Button variant="contained" color="primary" fullWidth type="submit">
-                    Next
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    fullWidth
+                    type="submit"
+                    className={loading ? 'loading' : ''}>
+                    {loading ? <CircularProgress color="inherit" size={loading ? 25 : 0} /> : 'Next'}
                   </Button>
                 </Box>
                 <div className={style.create}>

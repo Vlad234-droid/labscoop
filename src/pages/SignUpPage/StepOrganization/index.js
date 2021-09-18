@@ -18,7 +18,8 @@ const StepOrganization = ({ nextStep, setValuesToSignUp, valuesToSignUp }) => {
   } = useForm();
 
   const onSubmit = (data) => {
-    const prev = valuesToSignUp;
+    const prev = { ...valuesToSignUp };
+    prev.organization = {};
     for (let item in data) {
       prev.organization[item] = data[item];
     }
@@ -47,7 +48,7 @@ const StepOrganization = ({ nextStep, setValuesToSignUp, valuesToSignUp }) => {
                     }}
                     render={({ field }) => (
                       <>
-                        <FormControl fullWidth error={errors.type}>
+                        <FormControl fullWidth error={errors.type !== undefined}>
                           <InputLabel id="demo-simple-select-label">Organization Type</InputLabel>
                           <Select
                             {...field}
@@ -83,6 +84,12 @@ const StepOrganization = ({ nextStep, setValuesToSignUp, valuesToSignUp }) => {
                           <b>Organization Name</b> is required
                         </>
                       ),
+                      validate: (value) => {
+                        const re = /^[a-zA-Z]+(([',. _-])?[a-zA-Z]*)*$/;
+                        return re.test(value)
+                          ? true
+                          : 'Allowed characters: letters (a-z), numbers, underscores, periods, and dashes.';
+                      },
                     }}
                     render={({ field }) => (
                       <TextField
@@ -113,7 +120,7 @@ const StepOrganization = ({ nextStep, setValuesToSignUp, valuesToSignUp }) => {
                     }}
                     render={({ field }) => (
                       <>
-                        <FormControl fullWidth error={errors.position}>
+                        <FormControl fullWidth error={errors.position !== undefined}>
                           <InputLabel id="demo-simple-select-label">Organization Position</InputLabel>
                           <Select {...field}>
                             <MenuItem value={10}>Position 1</MenuItem>

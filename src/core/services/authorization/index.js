@@ -9,15 +9,15 @@ const initialState = {
 };
 
 const authorizeCustomer = createAsyncThunk('authorization/authorizeCustomer', async (body) => {
-  const headers = {
-    accept: ' application/json',
-    'Content-Type': 'application/x-www-form-urlencoded',
-  };
+  const formData = new FormData();
+  for (let i in body) {
+    formData.append(i, body[i]);
+  }
   try {
-    const response = await fetchApi(`${REACT_APP_API_URL}/auth`, 'POST', headers, JSON.stringify(body));
+    const response = await fetchApi(`${REACT_APP_API_URL}/auth`, 'POST', null, formData);
     return response;
   } catch (err) {
-    return Promise.reject(err);
+    throw new Error(err);
   }
 });
 
@@ -33,11 +33,5 @@ export const authorizationSlice = createSlice({
 });
 
 export const actions = { ...authorizationSlice.actions, authorizeCustomer };
-
-// export const test = (test) => (dispatch, getState) => {
-//   console.log(test);
-//   console.log(dispatch);
-//   console.log(getState);
-// };
 
 export default authorizationSlice.reducer;

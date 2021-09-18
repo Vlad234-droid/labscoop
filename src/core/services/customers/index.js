@@ -4,16 +4,20 @@ import lockr from 'lockr';
 
 const { REACT_APP_API_URL } = process.env;
 
-const { REACT_APP_API_URL } = process.env;
-
 const initialState = {
   value: 0,
   status: 'idle',
+  idCustomer: null,
 };
 
 const registerCustomer = createAsyncThunk('customers/registerCustomer', async (body) => {
   try {
-    const response = await fetchApi(`${REACT_APP_API_URL}/customers`, 'POST', null, JSON.stringify(body));
+    const response = await fetchApi(
+      `${REACT_APP_API_URL}/customers`,
+      'POST',
+      { 'content-type': 'application/json' },
+      JSON.stringify(body),
+    );
     return response;
   } catch (err) {
     return Promise.reject(err);
@@ -21,15 +25,20 @@ const registerCustomer = createAsyncThunk('customers/registerCustomer', async (b
 });
 
 const validateCustomerEmail = createAsyncThunk('customers/validateCustomerEmail', async (body) => {
+  const headers = { 'Content-Type': 'application/json', Accept: 'application/json' };
+
   try {
     const response = await fetchApi(
-      `${REACT_APP_API_URL}​/customers​/validate-email`,
+      `${REACT_APP_API_URL}​/customers/validate-email`,
       'POST',
-      null,
+      headers,
       JSON.stringify(body),
     );
+
     return response;
   } catch (err) {
+    console.log('Hello)');
+
     return Promise.reject(err);
   }
 });
@@ -326,8 +335,9 @@ export const customersSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    [registerCustomer.pending]: (state, action) => {
-      state.status = 'loading';
+    [registerCustomer.fulfilled]: (state, action) => {
+      state.idCustomer = action?.payload?.id;
+      state.email = action?.meta?.arg?.email;
     },
   },
 });
