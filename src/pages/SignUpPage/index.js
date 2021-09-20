@@ -83,6 +83,7 @@ function SignUpPage() {
                 slidesToScroll={1}
                 arrows={false}
                 initialSlide={0}
+                className="helo"
                 // accessibility={false}
               >
                 <StepPersonal
