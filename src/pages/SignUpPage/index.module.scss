@@ -8,6 +8,10 @@
   background: #f8f8fa;
   box-shadow: 0px 0px 16px rgba(16, 16, 16, 0.16);
   border-radius: 24px;
+  form {
+    border-top-left-radius: 24px;
+    border-bottom-left-radius: 24px;
+  }
   .formControl {
     max-width: 256px;
     margin: 0 auto 24px auto;
@@ -95,8 +99,7 @@
   list-style: none;
   li {
     padding-left: 48px;
-    background: url("../../assets/img/icon-tag.svg") no-repeat left top / 32px
-      32px;
+    background: url('../../assets/img/icon-tag.svg') no-repeat left top / 32px 32px;
     margin-bottom: 24px;
     b {
       font-style: normal;
@@ -122,7 +125,7 @@
 .featuresBox {
   position: relative;
   &::after {
-    content: "";
+    content: '';
     display: block;
     height: 85px;
     background: #c4c4c4;
