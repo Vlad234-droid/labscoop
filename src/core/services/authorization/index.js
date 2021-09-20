@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { fetchApi } from '../fetchApi';
+import lockr from 'lockr';
 
 const { REACT_APP_API_URL } = process.env;
 
@@ -26,9 +27,9 @@ export const authorizationSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    // [authorizeCustomer.pending]: (state, action) => {
-    //   state.status = 'loading';
-    // },
+    [authorizeCustomer.fulfilled]: (state, action) => {
+      lockr.set('token', action.payload.access_token);
+    },
   },
 });
 

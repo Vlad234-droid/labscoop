@@ -15,31 +15,26 @@ const registerCustomer = createAsyncThunk('customers/registerCustomer', async (b
     const response = await fetchApi(
       `${REACT_APP_API_URL}/customers`,
       'POST',
-      { 'content-type': 'application/json' },
+      { 'Content-type': 'application/json' },
       JSON.stringify(body),
     );
     return response;
   } catch (err) {
-    return Promise.reject(err);
+    throw new Error(err);
   }
 });
 
 const validateCustomerEmail = createAsyncThunk('customers/validateCustomerEmail', async (body) => {
-  const headers = { 'Content-Type': 'application/json', Accept: 'application/json' };
-
   try {
     const response = await fetchApi(
-      `${REACT_APP_API_URL}​/customers/validate-email`,
+      `${REACT_APP_API_URL}/customers/validate-email`,
       'POST',
-      headers,
+      { 'Content-type': 'application/json' },
       JSON.stringify(body),
     );
-
     return response;
   } catch (err) {
-    console.log('Hello)');
-
-    return Promise.reject(err);
+    throw new Error(err);
   }
 });
 
@@ -53,7 +48,7 @@ const resetPasswordRequest = createAsyncThunk('customers/resetPasswordRequest', 
     );
     return response;
   } catch (err) {
-    return Promise.reject(err);
+    throw new Error(err);
   }
 });
 
@@ -337,7 +332,7 @@ export const customersSlice = createSlice({
   extraReducers: {
     [registerCustomer.fulfilled]: (state, action) => {
       state.idCustomer = action?.payload?.id;
-      state.email = action?.meta?.arg?.email;
+      lockr.set('email', action?.meta?.arg?.email);
     },
   },
 });
@@ -364,11 +359,5 @@ export const actions = {
   deleteLabMateNotificationEmailAddress,
   subscribeScienceSamplesProgram,
 };
-
-// export const test = (test) => (dispatch, getState) => {
-//   console.log(test);
-//   console.log(dispatch);
-//   console.log(getState);
-// };
 
 export default customersSlice.reducer;
