@@ -5,7 +5,7 @@ import style from './style.module.scss';
 import { ArrowBread } from '../../components/icons';
 import { Link } from 'react-router-dom';
 import { imgsCats } from './config';
-import { NextSlider, PrevSlider } from '../../components/icons/';
+import { NextSlider, PrevSlider, Appendorf, Schott } from '../../components/icons/';
 
 const ListingPage = () => {
   const slider = useRef();
@@ -19,7 +19,7 @@ const ListingPage = () => {
     easing: 'ease-in-out',
     slidesToShow: 4,
     infinite: false,
-    slidesToScroll: 2,
+    slidesToScroll: 1,
     initialSlide: 0,
     prevArrow: (
       <div
@@ -61,13 +61,41 @@ const ListingPage = () => {
           <div className={style.slider_outer}>
             <Slider {...settings}>
               {imgsCats.map((item) => (
-                <div className={style.card}>
-                  <img src={item.img} alt="card" />
-                  <h4 className={style.title}>{item.title}</h4>
+                <div className="card" key={item.id}>
+                  <div className={style.inner_card}>
+                    <img src={item.img} alt="card" />
+                    <h4 className={style.title}>{item.title}</h4>
+                  </div>
                 </div>
               ))}
             </Slider>
           </div>
+        </div>
+        <div className={style.brands}>
+          <div class={style.top_brands}>
+            <div className={style.block}>
+              <h2>Top Brands</h2>
+              <Link to="/all-brands">See All</Link>
+            </div>
+          </div>
+          <div className={style.logo_brands}>
+            <div className={style.mult_brand}>
+              <Schott />
+            </div>
+            <div className={style.mult_brand}>
+              <Appendorf />
+            </div>
+            <div className={style.mult_brand}>
+              <Schott />
+            </div>
+            <div className={style.mult_brand}>
+              <Appendorf />
+            </div>
+          </div>
+        </div>
+        <div className={style.cards}>
+          <div className={style.card_img}></div>
+          <div className={style.card_img}></div>
         </div>
       </div>
     </div>

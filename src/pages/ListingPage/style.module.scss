@@ -36,14 +36,14 @@
     :global {
       .slick-slider {
         position: relative;
-        margin-top: 48px;
+        margin-top: 18px;
         .slick-arrow {
           position: absolute;
           &.slick-prev {
             &:before {
               content: '';
             }
-            right: 110px;
+            right: 35px;
             left: auto;
             top: -73px;
           }
@@ -51,7 +51,7 @@
             &:before {
               content: '';
             }
-            right: 79px;
+            right: 0px;
             top: -73px;
           }
           &.slick-disabled {
@@ -82,40 +82,83 @@
     }
     .slider_outer {
       :global {
-        .slick-track {
-          height: 360px;
-          overflow: hidden;
-        }
         .slick-list {
-          padding: 15px 0px 15px 0px;
+          height: 390px;
+          padding-top: 30px;
         }
-        .slick-slide {
-          max-width: 304px;
-          margin-right: 28px;
+        .card {
+          display: flex !important;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          flex-direction: column;
         }
       }
-
-      .card {
-        background: #ffffff;
-        box-shadow: 0px 0px 16px rgba(16, 16, 16, 0.16);
-        border-radius: 8px;
-        max-width: 304px;
-        width: 304px;
+      .inner_card {
+        min-width: 304px;
         height: 340px;
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
-        padding: 24px;
-        img {
-          max-width: 256px;
-          max-height: 196px;
-        }
+        justify-content: flex-start;
+        padding-top: 24px;
+        background: #ffffff;
+        box-shadow: 0px 0px 16px rgba(16, 16, 16, 0.16);
+        border-radius: 8px;
         .title {
           text-align: center;
           width: 100%;
           margin-top: 32px;
+          font-style: normal;
+          font-weight: 800;
+          font-size: 20px;
+          color: #2d3543;
         }
+      }
+    }
+  }
+  .brands {
+    .top_brands {
+      margin-top: 100px;
+      .block {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        h2 {
+          font-style: normal;
+          font-weight: 800;
+          font-size: 28px;
+          letter-spacing: 0.02em;
+          color: #2d3543;
+        }
+        a {
+          margin-top: 7px;
+          margin-left: 16px;
+        }
+      }
+    }
+    .logo_brands {
+      margin-top: 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+  .cards {
+    display: flex;
+
+    align-items: center;
+    .card_img {
+      width: 640px;
+      background: #ffffff;
+      box-shadow: 0px 0px 16px rgba(16, 16, 16, 0.16);
+      border-radius: 8px;
+      height: 366px;
+      &:first-child {
+        margin-right: 16px;
+      }
+      &:last-child {
+        margin-left: 16px;
       }
     }
   }
