@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-// import PrivateRoute from "./PrivatRouter";
-// import PrivateAdminRoute from "./PrivatAdminRouter";
+import PrivateRoute from './PrivatRouter';
 import CoreRouter from './CoreRouter';
 
 import SignIn from '../../pages/SignInPage';
@@ -28,7 +27,7 @@ const routes = () => {
         <Route exact path="/email-verification" component={SignInVerificationPage} />
         <Route exact path="/sign-up" component={SignUp} />
         <Route exact path="/listing" component={ListingPage} />
-        <Route exact path="/dashboard" component={Dashboard} />
+        <PrivateRoute exact path="/dashboard" component={Dashboard} />
 
         {/* <PrivateRoute exact path="/profile/add-project/" component={AddProjectPage} />
         <PrivateAdminRoute exact path="/admin/clients" component={AdminClientsPage} /> */}

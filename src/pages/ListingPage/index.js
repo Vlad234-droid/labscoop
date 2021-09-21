@@ -10,8 +10,6 @@ import { NextSlider, PrevSlider } from '../../components/icons/';
 const ListingPage = () => {
   const slider = useRef();
   const [currentStep, setCurrentStep] = useState(0);
-  console.log(imgsCats.length);
-  console.log('currentStep', currentStep);
   const settings = {
     ref: slider,
     touchMove: false,

@@ -39,7 +39,6 @@ function SignUpPage() {
   const [currentStep, setCurrentStep] = useState(0);
 
   const nextStep = () => {
-    console.log('slider', slider.current);
     slider.current.slickNext();
     setCurrentStep((prev) => prev + 1);
   };
@@ -60,7 +59,7 @@ function SignUpPage() {
           setErrorText(data.error.message.replace('Error: ', ''));
           setError(true);
         } else {
-          history.push('/sign-in');
+          history.push('/login');
         }
       });
     }
@@ -84,8 +83,7 @@ function SignUpPage() {
                 arrows={false}
                 initialSlide={0}
                 className="helo"
-                // accessibility={false}
-              >
+                accessibility={false}>
                 <StepPersonal
                   nextStep={nextStep}
                   setValuesToSignUp={setValuesToSignUp}

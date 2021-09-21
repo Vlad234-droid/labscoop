@@ -208,7 +208,7 @@ const StepOrganization = ({ nextStep, setValuesToSignUp, valuesToSignUp }) => {
 
               <Box mt={'auto'} ml={'auto'} mr={'auto'} maxWidth={320}>
                 <Box mt={2}>
-                  <Button variant="contained" color="primary" fullWidth type="submit">
+                  <Button variant="contained" size="large" color="primary" fullWidth type="submit">
                     Next
                   </Button>
                 </Box>

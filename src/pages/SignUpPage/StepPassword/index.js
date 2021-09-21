@@ -156,6 +156,7 @@ const StepPassword = ({ onSubmit, loading }) => {
                   <Button
                     variant="contained"
                     color="primary"
+                    size="large"
                     fullWidth
                     type="submit"
                     className={loading ? 'loading' : ''}>

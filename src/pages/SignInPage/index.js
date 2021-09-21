@@ -18,7 +18,7 @@ import {
   InputAdornment,
   IconButton,
 } from '@material-ui/core/';
-import MuiAlert from '@material-ui/lab/Alert';
+import lockr from 'lockr';
 import { HelperText } from '../../components/TextField';
 import { useForm, Controller } from 'react-hook-form';
 import headerLogo from '../../assets/img/header_logo.svg';
@@ -38,7 +38,7 @@ const SignInPage = () => {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
 
-  const { authorizeCustomer } = bindActionCreators(actions, dispatch);
+  const { authorizeCustomer, setToken } = bindActionCreators(actions, dispatch);
 
   const {
     control,
@@ -46,17 +46,18 @@ const SignInPage = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = ({ username, password }) => {
+  const onSubmit = ({ username, password, keepSigned }) => {
     setLoading(true);
     authorizeCustomer({ username, password }).then((data) => {
-      console.log('scooterok', data);
-
       setLoading(false);
       if (data.error) {
         setErrorText(data.error.message.replace('Error: ', ''));
         setError(true);
-      }
-      if (!data.error) {
+      } else {
+        const token = data.payload.access_token;
+        if (keepSigned) {
+          lockr.set('APP_AUTH_KEY', token);
+        }
         history.push('/dashboard');
       }
     });
@@ -97,7 +98,8 @@ const SignInPage = () => {
                             </>
                           ),
                           validate: (value) => {
-                            const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                            const re =
+                              /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                             if (re.test(value)) {
                               return true;
                             } else {
@@ -174,16 +176,24 @@ const SignInPage = () => {
                   </Grid>
 
                   <Box mt={'auto'} ml={'auto'} mr={'auto'} maxWidth={256}>
-                    <FormControlLabel
-                      className={style.keep}
-                      control={<Checkbox name="checkedA" color="primary" />}
-                      label="Keep me signed in on this computer"
+                    <Controller
+                      name="keepSigned"
+                      control={control}
+                      defaultValue=""
+                      render={({ field }) => (
+                        <FormControlLabel
+                          className={style.keep}
+                          control={<Checkbox {...field} name="keepSigned" color="primary" />}
+                          label="Keep me signed in on this computer"
+                        />
+                      )}
                     />
                     <Box mt={2}>
                       <Button
                         variant="contained"
                         color="primary"
                         fullWidth
+                        size="large"
                         type="submit"
                         className={loading ? 'loading' : ''}>
                         {loading ? <CircularProgress color="inherit" size={loading ? 25 : 0} /> : 'Sign In'}
