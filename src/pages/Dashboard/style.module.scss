@@ -1,0 +1,33 @@
+.page__dash {
+  header {
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 64px;
+    border-bottom: 2px solid #3360ad;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 16px;
+    letter-spacing: 0.03em;
+    color: #3360ad;
+    a {
+      color: currentColor;
+      text-decoration: none;
+    }
+    img {
+      height: 24px;
+    }
+  }
+  .container {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h2 {
+      font-size: 80px;
+      color: #3360ad;
+    }
+  }
+}
