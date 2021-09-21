@@ -272,6 +272,19 @@ const theme = createTheme({
         },
       },
     },
+    MuiBreadcrumbs: {
+      root: {
+        '& .MuiBreadcrumbs-li': {
+          '& a': {
+            fontStyle: 'normal',
+            fontWeight: 600,
+            fontSize: 12,
+            letterSpacing: '0.01em',
+            color: '#7E8AA0',
+          },
+        },
+      },
+    },
     MuiPaper: {
       root: {
         '&.MuiMenu-paper': {

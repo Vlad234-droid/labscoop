@@ -60,7 +60,7 @@ const SignInVerificationPage = () => {
     <>
       <div className="page__sign-in">
         <header>
-          <Link to="/">
+          <Link to="/login">
             <img src={headerLogo} alt="logo" />
           </Link>
           <Link to="/sign-up">Create an account</Link>
@@ -122,7 +122,7 @@ const SignInVerificationPage = () => {
                       </Button>
                     </Box>
                     <div className={style.create}>
-                      Don’t have an account? <Link to="/">Create an account</Link>
+                      Don’t have an account? <Link to="/sign-up">Create an account</Link>
                     </div>
                   </Box>
                 </Grid>

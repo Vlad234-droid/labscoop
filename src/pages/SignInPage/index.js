@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import {
   Button,
   Checkbox,
@@ -30,6 +31,7 @@ import style from './index.module.scss';
 // const Alert = () => <MuiAlert elevation={6} variant="filled" />;
 
 const SignInPage = () => {
+  const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [errorText, setErrorText] = useState(null);
@@ -54,6 +56,9 @@ const SignInPage = () => {
         setErrorText(data.error.message.replace('Error: ', ''));
         setError(true);
       }
+      if (!data.error) {
+        history.push('/dashboard');
+      }
     });
   };
 
@@ -65,7 +70,7 @@ const SignInPage = () => {
     <>
       <div className="page__sign-in">
         <header>
-          <Link to="/" className="no-decoration">
+          <Link to="/login" className="no-decoration">
             <img src={headerLogo} alt="logo" />
           </Link>
           <Link to="/sign-up">Create an account</Link>

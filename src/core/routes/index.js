@@ -7,6 +7,8 @@ import CoreRouter from './CoreRouter';
 import SignIn from '../../pages/SignInPage';
 import SignUp from '../../pages/SignUpPage';
 import SignInVerificationPage from '../../pages/SignInVerificationPage';
+import ListingPage from '../../pages/ListingPage';
+import Dashboard from '../../pages/Dashboard';
 
 //TODO Lazy
 function lazyWithPreload(factory) {
@@ -21,11 +23,12 @@ const routes = () => {
   return (
     <React.Suspense fallback="">
       <CoreRouter>
-        <Route exact path="/" component={SignIn} />
-        <Route exact path="/sign-in" component={SignIn} />
+        <Route exact path="/login" component={SignIn} />
         <Route exact path="/email-verification/:id" component={SignInVerificationPage} />
         <Route exact path="/email-verification" component={SignInVerificationPage} />
         <Route exact path="/sign-up" component={SignUp} />
+        <Route exact path="/listing" component={ListingPage} />
+        <Route exact path="/dashboard" component={Dashboard} />
 
         {/* <PrivateRoute exact path="/profile/add-project/" component={AddProjectPage} />
         <PrivateAdminRoute exact path="/admin/clients" component={AdminClientsPage} /> */}

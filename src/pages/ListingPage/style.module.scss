@@ -1,0 +1,122 @@
+.listing_container {
+  margin-top: 104px;
+  .breads {
+    li {
+      &:last-child {
+        a {
+          color: #3360ad;
+        }
+      }
+    }
+    .title {
+      font-weight: 800;
+      font-size: 48px;
+      font-style: normal;
+      color: #474f5c;
+      margin-top: 8px;
+    }
+  }
+  .popular_categories {
+    .title {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      h3 {
+        font-style: normal;
+        font-weight: 800;
+        font-size: 28px;
+        letter-spacing: 0.02em;
+        color: #2d3543;
+        margin-right: 16px;
+      }
+      a {
+        margin-top: 4px;
+      }
+    }
+    :global {
+      .slick-slider {
+        position: relative;
+        margin-top: 48px;
+        .slick-arrow {
+          position: absolute;
+          &.slick-prev {
+            &:before {
+              content: '';
+            }
+            right: 110px;
+            left: auto;
+            top: -73px;
+          }
+          &.slick-next {
+            &:before {
+              content: '';
+            }
+            right: 79px;
+            top: -73px;
+          }
+          &.slick-disabled {
+            pointer-events: none;
+            svg {
+              rect {
+                stroke: #7e8aa0;
+              }
+              g {
+                path {
+                  fill: #7e8aa0;
+                }
+              }
+            }
+          }
+          svg {
+            rect {
+              stroke: #3360ad;
+            }
+            g {
+              path {
+                fill: #3360ad;
+              }
+            }
+          }
+        }
+      }
+    }
+    .slider_outer {
+      :global {
+        .slick-track {
+          height: 360px;
+          overflow: hidden;
+        }
+        .slick-list {
+          padding: 15px 0px 15px 0px;
+        }
+        .slick-slide {
+          max-width: 304px;
+          margin-right: 28px;
+        }
+      }
+
+      .card {
+        background: #ffffff;
+        box-shadow: 0px 0px 16px rgba(16, 16, 16, 0.16);
+        border-radius: 8px;
+        max-width: 304px;
+        width: 304px;
+        height: 340px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 24px;
+        img {
+          max-width: 256px;
+          max-height: 196px;
+        }
+        .title {
+          text-align: center;
+          width: 100%;
+          margin-top: 32px;
+        }
+      }
+    }
+  }
+}

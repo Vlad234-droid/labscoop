@@ -11,7 +11,7 @@ import './style.module.scss';
 const Header = ({ step }) => {
   return (
     <header>
-      <Link to="/" className="no-decoration">
+      <Link to="/login" className="no-decoration">
         <img src={headerLogo} alt="logo" />
       </Link>
       <Stepper activeStep={step}>
@@ -25,7 +25,7 @@ const Header = ({ step }) => {
           <StepLabel StepIconComponent={IconLock}>Password</StepLabel>
         </Step>
       </Stepper>
-      <Link to="/">Sign In</Link>
+      <Link to="/login">Sign In</Link>
     </header>
   );
 };
