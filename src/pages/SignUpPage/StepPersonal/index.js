@@ -147,8 +147,7 @@ const StepPersonal = ({ nextStep, setValuesToSignUp, valuesToSignUp }) => {
                         </>
                       ),
                       validate: (value) => {
-                        const re =
-                          /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                        const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                         return re.test(value) ? null : 'Enter valid email';
                       },
                     }}
@@ -177,7 +176,7 @@ const StepPersonal = ({ nextStep, setValuesToSignUp, valuesToSignUp }) => {
                   </Button>
                 </Box>
                 <div className={style.create}>
-                  Don’t have an account? <Link to="/">Create an account</Link>
+                  Already have an account? <Link to="/">Sign In</Link>
                 </div>
               </Box>
             </Grid>

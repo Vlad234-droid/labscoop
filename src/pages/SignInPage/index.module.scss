@@ -8,9 +8,16 @@
   background: #f8f8fa;
   box-shadow: 0px 0px 16px rgba(16, 16, 16, 0.16);
   border-radius: 24px;
-  form {
-    border-top-left-radius: 24px;
-    border-bottom-left-radius: 24px;
+  .password {
+    :global {
+      .MuiIconButton-root {
+        padding: 6px;
+      }
+      .MuiSvgIcon-root {
+        width: 16px;
+        height: 16px;
+      }
+    }
   }
   .formControl {
     max-width: 256px;

@@ -10,15 +10,22 @@ import {
   TextField,
   Snackbar,
   CircularProgress,
+  FormHelperText,
+  FormControl,
+  InputLabel,
+  Input,
+  InputAdornment,
+  IconButton,
 } from '@material-ui/core/';
 import MuiAlert from '@material-ui/lab/Alert';
 import { HelperText } from '../../components/TextField';
 import { useForm, Controller } from 'react-hook-form';
 import headerLogo from '../../assets/img/header_logo.svg';
-import style from './index.module.scss';
 import { actions } from '../../core/services/authorization';
 import { bindActionCreators } from 'redux';
 import Notification from '../../components/Notification';
+import { Visibility, VisibilityOff } from '@material-ui/icons';
+import style from './index.module.scss';
 
 // const Alert = () => <MuiAlert elevation={6} variant="filled" />;
 
@@ -27,6 +34,8 @@ const SignInPage = () => {
   const [error, setError] = useState(false);
   const [errorText, setErrorText] = useState(null);
   const dispatch = useDispatch();
+  const [showPassword, setShowPassword] = useState(false);
+
   const { authorizeCustomer } = bindActionCreators(actions, dispatch);
 
   const {
@@ -48,12 +57,9 @@ const SignInPage = () => {
     });
   };
 
-  // const onSubmit = (e) => {
-  //   const form = new FormData(e.target);
-  //   e.preventDefault();
-  //   console.log('email', form.get('email'));
-  //   console.log('password', form.get('password'));
-  // };
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
   return (
     <>
@@ -86,8 +92,7 @@ const SignInPage = () => {
                             </>
                           ),
                           validate: (value) => {
-                            const re =
-                              /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                            const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                             if (re.test(value)) {
                               return true;
                             } else {
@@ -130,16 +135,30 @@ const SignInPage = () => {
                           ),
                         }}
                         render={({ field }) => (
-                          <TextField
-                            {...field}
-                            error={errors.password !== undefined}
-                            label="Password"
-                            fullWidth
-                            type="password"
-                            helperText={
-                              errors.password !== undefined ? <HelperText text={errors.password.message} /> : false
-                            }
-                          />
+                          <FormControl fullWidth className={style.password} error={errors.password ? true : false}>
+                            <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+                            <Input
+                              {...field}
+                              id="standard-adornment-password"
+                              type={showPassword ? 'text' : 'password'}
+                              // value={value}
+                              endAdornment={
+                                <InputAdornment position="end">
+                                  <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={() => setShowPassword((prev) => !prev)}
+                                    onMouseDown={handleMouseDownPassword}>
+                                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                                  </IconButton>
+                                </InputAdornment>
+                              }
+                            />
+                            {errors.password && (
+                              <FormHelperText>
+                                <HelperText text={errors.password.message} />
+                              </FormHelperText>
+                            )}
+                          </FormControl>
                         )}
                       />
 

@@ -36,6 +36,53 @@ const StepOrganization = ({ nextStep, setValuesToSignUp, valuesToSignUp }) => {
               <Grid item>
                 <Box mb={2} ml={'auto'} mr={'auto'} maxWidth={320}>
                   <Controller
+                    name="structure"
+                    control={control}
+                    defaultValue=""
+                    rules={{
+                      required: (
+                        <>
+                          <b>Organization Structure</b> is required
+                        </>
+                      ),
+                    }}
+                    render={({ field }) => (
+                      <>
+                        <FormControl fullWidth error={errors.type !== undefined}>
+                          <InputLabel id="demo-simple-select-label">Organization Structure</InputLabel>
+                          <Select
+                            {...field}
+                            // labelId='demo-simple-select-label'
+                            // id='demo-simple-select'
+                            // value={age}
+                            // onChange={handleChange}
+                          >
+                            <MenuItem value={'C-Corporation'}>C-Corporation</MenuItem>
+                            <MenuItem value={'S-Corporation'}>S-Corporation</MenuItem>
+                            <MenuItem value={'Non-Profit Organization 501(c)(3)'}>
+                              Non-Profit Organization 501(c)(3)
+                            </MenuItem>
+                            <MenuItem value={'Limited Liability Company (LLC)'}>
+                              Limited Liability Company (LLC)
+                            </MenuItem>
+                            <MenuItem value={'State Government Organization'}>State Government Organization</MenuItem>
+                            <MenuItem value={'Federal Government Organization'}>
+                              Federal Government Organization
+                            </MenuItem>
+                            <MenuItem value={'Partnership'}>Partnership</MenuItem>
+                            <MenuItem value={'Sole Proprietorship'}>Sole Proprietorship</MenuItem>
+                            <MenuItem value={'Other'}>Other</MenuItem>
+                          </Select>
+                          {errors.structure && (
+                            <FormHelperText>
+                              <HelperText text={errors.structure.message} />
+                            </FormHelperText>
+                          )}
+                        </FormControl>
+                      </>
+                    )}
+                  />
+                  <Controller
                     name="type"
                     control={control}
                     defaultValue=""
@@ -57,9 +104,22 @@ const StepOrganization = ({ nextStep, setValuesToSignUp, valuesToSignUp }) => {
                             // value={age}
                             // onChange={handleChange}
                           >
-                            <MenuItem value={10}>Type 1</MenuItem>
-                            <MenuItem value={20}>Type 2</MenuItem>
-                            <MenuItem value={30}>Type 3</MenuItem>
+                            <MenuItem value={'University'}>University</MenuItem>
+                            <MenuItem value={'Government'}>Government</MenuItem>
+                            <MenuItem value={'Biotech'}>Biotech</MenuItem>
+                            <MenuItem value={'Private Research'}>Private Research</MenuItem>
+                            <MenuItem value={'Hospital/Medical School'}>Hospital/Medical School</MenuItem>
+                            <MenuItem value={'Contract Research Organization (CRO)'}>
+                              Contract Research Organization (CRO)
+                            </MenuItem>
+                            <MenuItem value={'Pharmaceutical'}>Pharmaceutical</MenuItem>
+                            <MenuItem value={'Diagnostics'}>Diagnostics</MenuItem>
+                            <MenuItem value={'Aerospace'}>Aerospace</MenuItem>
+                            <MenuItem value={'Cosmetics'}>Cosmetics</MenuItem>
+                            <MenuItem value={'Energy'}>Energy</MenuItem>
+                            <MenuItem value={'Agriculture'}>Agriculture</MenuItem>
+                            <MenuItem value={'Industrial Chemicals'}>Industrial Chemicals</MenuItem>
+                            <MenuItem value={'Other'}>Other</MenuItem>
                           </Select>
                           {errors.type && (
                             <FormHelperText>
@@ -84,12 +144,12 @@ const StepOrganization = ({ nextStep, setValuesToSignUp, valuesToSignUp }) => {
                           <b>Organization Name</b> is required
                         </>
                       ),
-                      validate: (value) => {
-                        const re = /^[a-zA-Z]+(([',. _-])?[a-zA-Z]*)*$/;
-                        return re.test(value)
-                          ? true
-                          : 'Allowed characters: letters (a-z), numbers, underscores, periods, and dashes.';
-                      },
+                      // validate: (value) => {
+                      //   const re = /^[a-zA-Z]+(([',. _-])?[a-zA-Z]*)*$/;
+                      //   return re.test(value)
+                      //     ? true
+                      //     : 'Allowed characters: letters (a-z), numbers, underscores, periods, and dashes.';
+                      // },
                     }}
                     render={({ field }) => (
                       <TextField
@@ -123,9 +183,16 @@ const StepOrganization = ({ nextStep, setValuesToSignUp, valuesToSignUp }) => {
                         <FormControl fullWidth error={errors.position !== undefined}>
                           <InputLabel id="demo-simple-select-label">Organization Position</InputLabel>
                           <Select {...field}>
-                            <MenuItem value={10}>Position 1</MenuItem>
-                            <MenuItem value={20}>Position 2</MenuItem>
-                            <MenuItem value={30}>Position 3</MenuItem>
+                            <MenuItem value={'Principal Investigator'}>Principal Investigator</MenuItem>
+                            <MenuItem value={'Lab Manager/Director'}>Lab Manager/Director</MenuItem>
+                            <MenuItem value={'Department Administrator'}>Department Administrator</MenuItem>
+                            <MenuItem value={'Buyer/Purchasing Agent'}>Buyer/Purchasing Agent</MenuItem>
+                            <MenuItem value={'Technician'}>Technician</MenuItem>
+                            <MenuItem value={'Postdoctoral Fellow'}>Postdoctoral Fellow</MenuItem>
+                            <MenuItem value={'Graduate Student'}>Graduate Student</MenuItem>
+                            <MenuItem value={'Procurement Administrator'}>Procurement Administrator</MenuItem>
+                            <MenuItem value={'Financial Administrator'}>Financial Administrator</MenuItem>
+                            <MenuItem value={'Other'}>Other</MenuItem>
                           </Select>
                           {errors.position && (
                             <FormHelperText>
@@ -146,7 +213,7 @@ const StepOrganization = ({ nextStep, setValuesToSignUp, valuesToSignUp }) => {
                   </Button>
                 </Box>
                 <div className={style.create}>
-                  Don’t have an account? <Link to="/">Create an account</Link>
+                  Already have an account? <Link to="/">Sign In</Link>
                 </div>
               </Box>
             </Grid>

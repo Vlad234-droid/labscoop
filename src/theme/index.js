@@ -63,6 +63,9 @@ const theme = createTheme({
         lineHeight: '24px',
         letterSpacing: '0.01em',
         color: '#2D3543',
+        '&:-webkit-autofill': {
+          WebkitBoxShadow: '0 0 0 1000px white inset !important',
+        },
       },
     },
     MuiFormLabel: {
@@ -266,6 +269,13 @@ const theme = createTheme({
           left: -24,
           margin: 0,
           padding: 0,
+        },
+      },
+    },
+    MuiPaper: {
+      root: {
+        '&.MuiMenu-paper': {
+          marginTop: '15px',
         },
       },
     },

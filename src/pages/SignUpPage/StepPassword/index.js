@@ -163,7 +163,7 @@ const StepPassword = ({ onSubmit, loading }) => {
                   </Button>
                 </Box>
                 <div className={style.create}>
-                  Don’t have an account? <Link to="/">Create an account</Link>
+                  Already have an account? <Link to="/">Sign In</Link>
                 </div>
               </Box>
             </Grid>
