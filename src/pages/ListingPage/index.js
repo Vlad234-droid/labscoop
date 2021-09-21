@@ -1,11 +1,15 @@
 import React, { useRef, useState } from 'react';
 import Slider from 'react-slick';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
-import style from './style.module.scss';
+import Button from '@material-ui/core/Button';
 import { ArrowBread } from '../../components/icons';
 import { Link } from 'react-router-dom';
 import { imgsCats } from './config';
 import { NextSlider, PrevSlider, Appendorf, Schott } from '../../components/icons/';
+import tablets from '../../assets/img/tablets.jpg';
+import ampyla from '../../assets/img/ampyla.jpg';
+import LabFavourites from '../../components/LabFavourites';
+import style from './style.module.scss';
 
 const ListingPage = () => {
   const slider = useRef();
@@ -94,9 +98,30 @@ const ListingPage = () => {
           </div>
         </div>
         <div className={style.cards}>
-          <div className={style.card_img}></div>
-          <div className={style.card_img}></div>
+          <div className={style.card_img}>
+            <img className={style.tabl_img} src={tablets} alt="tablets" />
+            <h2 className={style.title}>Science Samples</h2>
+            <p className={style.sub_title}>DISCOVERY DELIVERED</p>
+            <p className={style.text}>
+              Make sure your lab is working with the most cost-effective, innovative products available.
+            </p>
+            <Button variant="outlined" color="primary">
+              Get Science Samples
+            </Button>
+            <h4>
+              Exclusively for <span>Labscoop Enterprise</span> members
+            </h4>
+          </div>
+          <div className={style.card_img}>
+            <img className={style.tabl_img} src={ampyla} alt="ampyla" />
+            <h2 className={style.title}>Working with RNA?</h2>
+            <p className={style.sub_title}>Featured Product by Gerthosite</p>
+            <p className={style.text}>Prevent RNase and DNase degredation with RNase and DNase free Nitrile gloves.</p>
+            <h4>Starting at $16.00</h4>
+          </div>
         </div>
+
+        <LabFavourites />
       </div>
     </div>
   );
