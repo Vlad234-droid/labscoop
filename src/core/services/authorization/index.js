@@ -5,8 +5,8 @@ import lockr from 'lockr';
 const { REACT_APP_API_URL } = process.env;
 
 const initialState = {
-  value: 0,
-  status: 'idle',
+  APP_AUTH_KEY: lockr.get('APP_AUTH_KEY') || null,
+  isloggedIn: lockr.get('APP_AUTH_KEY') ? true : false,
 };
 
 const authorizeCustomer = createAsyncThunk('authorization/authorizeCustomer', async (body) => {
@@ -25,10 +25,19 @@ const authorizeCustomer = createAsyncThunk('authorization/authorizeCustomer', as
 export const authorizationSlice = createSlice({
   name: 'authorization',
   initialState,
-  reducers: {},
+  reducers: {
+    logout: (state) => {
+      state.isloggedIn = false;
+      state.APP_AUTH_KEY = null;
+      lockr.rm('APP_AUTH_KEY');
+    },
+  },
   extraReducers: {
     [authorizeCustomer.fulfilled]: (state, action) => {
-      lockr.set('token', action.payload.access_token);
+      if (action.payload.access_token) {
+        state.APP_AUTH_KEY = action.payload.access_token;
+        state.isloggedIn = true;
+      }
     },
   },
 });

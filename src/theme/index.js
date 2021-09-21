@@ -21,8 +21,6 @@ const theme = createTheme({
     },
     MuiButton: {
       root: {
-        minWidth: 232,
-        height: 48,
         boxShadow: '0px 0px 8px rgba(45, 53, 67, 0.12)',
         borderRadius: 8,
         textTransform: 'none',
@@ -33,6 +31,10 @@ const theme = createTheme({
           pointerEvents: 'none',
           transform: 'scale(.9)',
         },
+      },
+      containedSizeLarge: {
+        minWidth: 232,
+        height: 48,
       },
       containedPrimary: {
         backgroundColor: '#3360AD',

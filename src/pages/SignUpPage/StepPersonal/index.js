@@ -114,7 +114,6 @@ const StepPersonal = ({ nextStep, setValuesToSignUp, valuesToSignUp }) => {
                       ),
                       validate: (value) => {
                         const re = /^\+?[0-9][-\(]?\d{3}\)? ?\d{3} ?\d{2} ?\d{2}$/;
-                        console.log(re.test(value));
                         return re.test(value) ? true : 'The phone number not valid';
                       },
                     }}
@@ -147,7 +146,8 @@ const StepPersonal = ({ nextStep, setValuesToSignUp, valuesToSignUp }) => {
                         </>
                       ),
                       validate: (value) => {
-                        const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                        const re =
+                          /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                         return re.test(value) ? null : 'Enter valid email';
                       },
                     }}
@@ -171,7 +171,7 @@ const StepPersonal = ({ nextStep, setValuesToSignUp, valuesToSignUp }) => {
 
               <Box mt={'auto'} ml={'auto'} mr={'auto'} maxWidth={320}>
                 <Box mt={2}>
-                  <Button variant="contained" color="primary" fullWidth type="submit">
+                  <Button variant="contained" size="large" color="primary" fullWidth type="submit">
                     Next
                   </Button>
                 </Box>

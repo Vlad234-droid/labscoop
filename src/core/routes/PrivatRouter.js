@@ -1,36 +1,31 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import DocSign from '../../pages/DocSign';
-import LoadingPage from '../../pages/LoadingPage';
-
-import { fetchUserData } from '../services/';
+import SignIn from '../../pages/SignInPage';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const dispatch = useDispatch();
-  const isloggedIn = useSelector((state) => state.user.isloggedIn);
-  const isAdmin = useSelector((state) => state.user.isAdmin);
-  const userData = useSelector((state) => state.user.data);
+  const isloggedIn = useSelector((state) => state.authorization.isloggedIn);
 
-  if (isloggedIn && !userData) {
-    fetchUserData(dispatch);
-  }
+  console.log('isloggedIn', isloggedIn);
 
-  const CurrentComponent = isloggedIn ? (
-    !userData ? (
-      <LoadingPage />
-    ) : !isAdmin ? (
-      userData.profile.id_status ? (
-        <Component />
-      ) : (
-        <DocSign />
-      )
-    ) : (
-      <Redirect to="/admin/clients" />
-    )
-  ) : (
-    <Redirect to="/sign-in/" />
-  );
+  const CurrentComponent = isloggedIn ? <Component /> : <Redirect to="/login" />;
+
+  // const CurrentComponent = isloggedIn ? (
+  //   !userData ? (
+  //     <LoadingPage />
+  //   ) : !isAdmin ? (
+  //     userData.profile.id_status ? (
+  //       <Component />
+  //     ) : (
+  //       <DocSign />
+  //     )
+  //   ) : (
+  //     <Redirect to="/admin/clients" />
+  //   )
+  // ) : (
+  //   <Redirect to="/sign-in/" />
+  // );
   //const CurrentComponent = isloggedIn ? (
   //  !userData ? (
   //    <LoadingPage />
