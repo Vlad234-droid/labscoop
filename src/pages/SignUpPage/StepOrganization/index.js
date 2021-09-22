@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import { FormControl, InputLabel, Select, MenuItem, TextField, FormHelperText } from '@material-ui/core/';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import { useForm, Controller } from 'react-hook-form';
 import { HelperText } from '../../../components/TextField';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import style from '../index.module.scss';
+import { useSelector } from 'react-redux';
 
 const StepOrganization = ({ nextStep, setValuesToSignUp, valuesToSignUp }) => {
-  const [phone, setPhone] = useState();
+  const countries = useSelector((state) => state.data.countries);
 
   const {
     control,
@@ -18,10 +20,13 @@ const StepOrganization = ({ nextStep, setValuesToSignUp, valuesToSignUp }) => {
   } = useForm();
 
   const onSubmit = (data) => {
-    const prev = { ...valuesToSignUp };
+    const prev = {
+      ...valuesToSignUp,
+      country: data.country.code,
+    };
     prev.organization = {};
     for (let item in data) {
-      prev.organization[item] = data[item];
+      if (item !== 'country') prev.organization[item] = data[item];
     }
     setValuesToSignUp(() => prev);
     nextStep();
@@ -33,6 +38,61 @@ const StepOrganization = ({ nextStep, setValuesToSignUp, valuesToSignUp }) => {
         <Grid item xs={6}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Grid container direction="column" wrap="nowrap">
+              <Grid item>
+                <Box mb={2} ml={'auto'} mr={'auto'} maxWidth={320}>
+                  <Controller
+                    name="country"
+                    control={control}
+                    defaultValue=""
+                    rules={{
+                      required: (
+                        <>
+                          <b>Organization Structure</b> is required
+                        </>
+                      ),
+                    }}
+                    render={({ field }) => (
+                      <>
+                        <Autocomplete
+                          id="combo-box-demo"
+                          options={countries}
+                          getOptionLabel={(option) => option.name}
+                          fullWidth
+                          onChange={(e, value) => {
+                            return field.onChange(value);
+                          }}
+                          renderInput={(params) => {
+                            return (
+                              <TextField
+                                {...params}
+                                error={errors.country !== undefined}
+                                label="Countries"
+                                fullWidth
+                                name="name"
+                                helperText={
+                                  errors.country !== undefined ? <HelperText text={errors.country.message} /> : null
+                                }
+                              />
+                            );
+                          }}
+                        />
+                        {/* <FormControl fullWidth error={errors.type !== undefined}>
+                          <InputLabel id="demo-simple-select-label">Country</InputLabel>
+                          <Select {...field}>
+                            {countries.length &&
+                              countries.map((item) => <MenuItem value={'C-Corporation'}>C-Corporation</MenuItem>)}
+                          </Select>
+                          {errors.structure && (
+                            <FormHelperText>
+                              <HelperText text={errors.structure.message} />
+                            </FormHelperText>
+                          )}
+                        </FormControl> */}
+                      </>
+                    )}
+                  />
+                </Box>
+              </Grid>
               <Grid item>
                 <Box mb={2} ml={'auto'} mr={'auto'} maxWidth={320}>
                   <Controller
@@ -48,7 +108,7 @@ const StepOrganization = ({ nextStep, setValuesToSignUp, valuesToSignUp }) => {
                     }}
                     render={({ field }) => (
                       <>
-                        <FormControl fullWidth error={errors.type !== undefined}>
+                        <FormControl fullWidth error={errors.structure !== undefined}>
                           <InputLabel id="demo-simple-select-label">Organization Structure</InputLabel>
                           <Select
                             {...field}
@@ -82,6 +142,10 @@ const StepOrganization = ({ nextStep, setValuesToSignUp, valuesToSignUp }) => {
                       </>
                     )}
                   />
+                </Box>
+              </Grid>
+              <Grid item>
+                <Box mb={2} ml={'auto'} mr={'auto'} maxWidth={320}>
                   <Controller
                     name="type"
                     control={control}

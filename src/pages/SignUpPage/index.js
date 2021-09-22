@@ -6,10 +6,12 @@ import StepPassword from './StepPassword';
 import Header from './Header';
 import style from './index.module.scss';
 import { actions } from '../../core/services/customers';
+import { actions as dataActions } from '../../core/services/data';
 import { bindActionCreators } from 'redux';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Notification from '../../components/Notification';
+
 function SignUpPage() {
   const slider = useRef();
   const dispatch = useDispatch();
@@ -20,6 +22,7 @@ function SignUpPage() {
   const history = useHistory();
 
   const { registerCustomer } = bindActionCreators(actions, dispatch);
+  const { getCountries } = bindActionCreators(dataActions, dispatch);
 
   const [valuesToSignUp, setValuesToSignUp] = useState({
     email: '',
@@ -37,6 +40,10 @@ function SignUpPage() {
   });
 
   const [currentStep, setCurrentStep] = useState(0);
+
+  useEffect(() => {
+    getCountries();
+  }, []);
 
   const nextStep = () => {
     slider.current.slickNext();
@@ -83,7 +90,8 @@ function SignUpPage() {
                 arrows={false}
                 initialSlide={0}
                 className="helo"
-                accessibility={false}>
+                // accessibility={false}
+              >
                 <StepPersonal
                   nextStep={nextStep}
                   setValuesToSignUp={setValuesToSignUp}

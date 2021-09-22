@@ -5,6 +5,7 @@ import categories from '../core/services/categories';
 import search from '../core/services/search';
 import products from '../core/services/products';
 import lab_groups from '../core/services/lab_groups';
+import data from '../core/services/data';
 
 export const store = configureStore({
   reducer: {
@@ -14,5 +15,6 @@ export const store = configureStore({
     search,
     lab_groups,
     products,
+    data,
   },
 });
