@@ -16,6 +16,7 @@
     flex-wrap: wrap;
     gap: 32px;
     .card {
+      max-width: 640px;
       height: 312px;
       padding: 40px 32px;
       background: #ffffff;
@@ -27,6 +28,18 @@
       flex-direction: row;
       align-content: center;
       justify-content: space-between;
+      .img_card {
+        width: 247px;
+        height: 240px;
+        position: relative;
+        img {
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          bottom: 0px;
+          right: 0px;
+        }
+      }
       .direct_flex {
         display: flex;
         justify-content: space-between;
@@ -52,12 +65,17 @@
           }
         }
         .actions {
-          display: inline-flex;
+          display: flex;
           align-content: center;
+          justify-content: space-between;
+          width: 100%;
           .price {
           }
         }
       }
     }
   }
+}
+
+@media (max-width: 1440px) {
 }

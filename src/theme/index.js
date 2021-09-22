@@ -36,6 +36,25 @@ const theme = createTheme({
         minWidth: 232,
         height: 48,
       },
+      outlinedPrimary: {
+        fontFamily: $Nunito,
+        fontStyle: 'normal',
+        fontWeight: 800,
+        fontSize: 16,
+        textAlign: 'center',
+        letterSpacing: 0.03,
+        color: '#3360AD',
+        width: '144px',
+        height: '48px',
+        '&:hover': {
+          color: '#208C72',
+          borderColor: '#208C72',
+        },
+        '&:active': {
+          color: '#1E3966',
+          borderColor: '#1E3966',
+        },
+      },
       containedPrimary: {
         backgroundColor: '#3360AD',
         fontFamily: $Nunito,

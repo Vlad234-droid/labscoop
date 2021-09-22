@@ -14,7 +14,7 @@ const LabFavourites = () => {
               <div className={style.info}>
                 <h4 className={style.pre_title}>{item.pre_title}</h4>
                 <h2 className={style.title}>{item.title}</h2>
-                <div className={style.stars}>18 stars</div>
+                <div className={style.stars}>Stars</div>
               </div>
               <div className={style.actions}>
                 <div className={style.price}>

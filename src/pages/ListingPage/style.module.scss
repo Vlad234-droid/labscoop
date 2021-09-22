@@ -157,6 +157,9 @@
       height: 366px;
       padding: 56px 0px 54px 56px;
       position: relative;
+      .except {
+        width: 232px;
+      }
       .tabl_img {
         position: absolute;
         top: 46px;
@@ -220,6 +223,35 @@
           color: #3360ad;
           cursor: pointer;
         }
+      }
+    }
+  }
+  .browse {
+    background: #f8f8fa;
+    padding-top: 80px;
+    position: relative;
+    .title {
+      width: 100%;
+      text-align: center;
+      h2 {
+        font-style: normal;
+        font-weight: 800;
+        font-size: 48px;
+        color: #2d3543;
+        margin-bottom: 24px;
+      }
+    }
+    .all_products {
+      margin-top: 52px;
+      position: relative;
+      .fade {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        bottom: 0px;
+        right: 0px;
+        width: 100%;
+        height: 100%;
       }
     }
   }

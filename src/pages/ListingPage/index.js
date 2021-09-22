@@ -9,6 +9,7 @@ import { NextSlider, PrevSlider, Appendorf, Schott } from '../../components/icon
 import tablets from '../../assets/img/tablets.jpg';
 import ampyla from '../../assets/img/ampyla.jpg';
 import LabFavourites from '../../components/LabFavourites';
+import allProd from '../../assets/img/allProd.jpg';
 import style from './style.module.scss';
 
 const ListingPage = () => {
@@ -55,6 +56,8 @@ const ListingPage = () => {
           </Breadcrumbs>
           <h2 className={style.title}>Labware</h2>
         </div>
+      </div>
+      <div className="main_wrapper">
         <div className={style.popular_categories}>
           <div className={style.title}>
             <h3>Popular Categories</h3>
@@ -73,6 +76,8 @@ const ListingPage = () => {
             </Slider>
           </div>
         </div>
+      </div>
+      <div className="main_wrapper">
         <div className={style.brands}>
           <div class={style.top_brands}>
             <div className={style.block}>
@@ -95,6 +100,8 @@ const ListingPage = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="main_wrapper">
         <div className={style.cards}>
           <div className={style.card_img}>
             <img className={style.tabl_img} src={tablets} alt="tablets" />
@@ -103,7 +110,7 @@ const ListingPage = () => {
             <p className={style.text}>
               Make sure your lab is working with the most cost-effective, innovative products available.
             </p>
-            <Button variant="outlined" color="primary">
+            <Button variant="outlined" color="primary" className={style.except}>
               Get Science Samples
             </Button>
             <h4>
@@ -118,8 +125,25 @@ const ListingPage = () => {
             <h4>Starting at $16.00</h4>
           </div>
         </div>
+      </div>
 
+      <div className="main_wrapper">
         <LabFavourites />
+      </div>
+
+      <div className={style.browse}>
+        <div className="main_wrapper">
+          <div className={style.title}>
+            <h2>Browse All Labware Products</h2>
+            <Button variant="contained" color="primary" size="large" type="submit">
+              Show All
+            </Button>
+          </div>
+          <div className={style.all_products}>
+            <img src={allProd} alt="allProd" />
+            <div className={style.fade}></div>
+          </div>
+        </div>
       </div>
     </div>
   );
